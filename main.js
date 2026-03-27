@@ -204,6 +204,25 @@ card.addEventListener('click', () => {
     }
 });
 
+// 手機滑動操作 (Swipe Handling)
+let touchStartX = 0;
+let touchEndX = 0;
+
+card.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+card.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    
+    // 如果滑動距離大於 50px 才判定為左右切換，否則保留給原本的點擊發音
+    if (touchStartX - touchEndX > 50) {
+        changeItemWithSlide('next'); // 往左滑 = 下一頁
+    } else if (touchEndX - touchStartX > 50) {
+        changeItemWithSlide('prev'); // 往右滑 = 上一頁
+    }
+});
+
 // 註記鍵盤輔助操作
 document.addEventListener('keydown', (e) => {
     // 如果還在開始畫面，按下 Enter 或空白鍵可以直接進入
