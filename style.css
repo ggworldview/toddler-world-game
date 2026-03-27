@@ -228,10 +228,10 @@ body {
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.5); /* 提升通透感 */
-    backdrop-filter: blur(25px); /* 強化毛玻璃質感 */
-    -webkit-backdrop-filter: blur(25px);
-    border-radius: 35px;
+    background: rgba(255, 255, 255, 0.3); /* 提升通透至 30% */
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -239,10 +239,10 @@ body {
     width: 88vw;
     max-width: 500px;
     height: 65vh;
-    min-height: 380px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-    padding: 15px; /* 縮小內邊距，讓內容更大 */
-    border: 6px solid white;
+    min-height: 400px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.08); /* 弱化陰影提升整體輕盈感 */
+    padding: 10px; 
+    border: 3px solid rgba(255, 255, 255, 0.4); /* 邊框更薄更透 */
     cursor: pointer;
     touch-action: pan-y;
 }
@@ -297,9 +297,9 @@ body {
     max-height: 48vh;
     object-fit: contain;
     border-radius: 25px;
-    border: 8px solid white;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    background-color: #fcfcfc;
+    border: 5px solid rgba(255, 255, 255, 0.3); /* 邊框更薄更透 */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    background-color: transparent; /* 容器完全透明，不擋住背景 */
 }
 
 /* 動畫 */

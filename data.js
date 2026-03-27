@@ -637,7 +637,7 @@ const vehicles = [
         "name_ja": "車（くるま）"
     },
     {
-        "img": "./assets/z_vehicles_計程車.jpg",
+        "img": "./assets/tw_vehicle_計程車.png",
         "name_zh": "計程車",
         "name_en": "Taxi",
         "name_ja": "タクシー"
@@ -655,7 +655,7 @@ const vehicles = [
         "name_ja": "スポーツカー"
     },
     {
-        "img": "./assets/z_vehicles_吉普車.jpg",
+        "img": "./assets/tw_vehicle_吉普車.png",
         "name_zh": "吉普車",
         "name_en": "Jeep",
         "name_ja": "ジープ"
@@ -685,7 +685,7 @@ const vehicles = [
         "name_ja": "スクールバス"
     },
     {
-        "img": "./assets/z_vehicles_垃圾車.jpg",
+        "img": "./assets/tw_vehicle_垃圾車.png",
         "name_zh": "垃圾車",
         "name_en": "Garbage Truck",
         "name_ja": "ゴミ収集車"
@@ -757,8 +757,8 @@ const vehicles = [
         "name_ja": "ブルドーザー"
     },
     {
-        "img": "./assets/z_vehicles_水泥車.jpg",
-        "name_zh": "水泥車",
+        "img": "./assets/tw_vehicle_水泥攪拌車.png",
+        "name_zh": "水泥攪拌車",
         "name_en": "Cement Mixer",
         "name_ja": "ミキサー車"
     },
