@@ -25,44 +25,54 @@
         <button id="start-btn">開始玩囉！</button>
     </div>
 
-    <!-- 主遊戲畫面 -->
-    <div id="game-container" class="hidden">
-
-        <!-- 語言切換選單 -->
-        <div id="lang-selector" class="lang-selector">
-            <button class="lang-btn active" data-lang="zh">🇹🇼</button>
-            <button class="lang-btn" data-lang="en">🇺🇸</button>
-            <button class="lang-btn" data-lang="ja">🇯🇵</button>
+    <div id="game-app" class="hidden">
+        <!-- 語言切換選單 (全域) -->
+        <div class="lang-selector-top">
+            <div class="lang-selector">
+                <button class="lang-btn active" data-lang="zh">🇹🇼</button>
+                <button class="lang-btn" data-lang="en">🇺🇸</button>
+                <button class="lang-btn" data-lang="ja">🇯🇵</button>
+            </div>
         </div>
 
-        <!-- 分類切換區：支援左右滑動以容納多個分類 -->
-        <div class="category-tabs">
-            <button class="tab-btn active" data-category="animals" data-name-zh="動物" data-name-en="Animals" data-name-ja="動物">🐻 動物</button>
-            <button class="tab-btn" data-category="pets" data-name-zh="寵物" data-name-en="Pets" data-name-ja="ペット">🐶 寵物</button>
-            <button class="tab-btn" data-category="ocean" data-name-zh="海洋" data-name-en="Ocean" data-name-ja="海">🐠 海洋</button>
-            <button class="tab-btn" data-category="vehicles" data-name-zh="交通" data-name-en="Vehicles" data-name-ja="乗り物">🚗 交通</button>
-            <button class="tab-btn" data-category="fruits" data-name-zh="蔬果" data-name-en="Fruits" data-name-ja="果物">🍎 蔬果</button>
-            <button class="tab-btn" data-category="insects" data-name-zh="昆蟲" data-name-en="Insects" data-name-ja="昆虫">🐛 昆蟲</button>
-            <button class="tab-btn" data-category="dinosaurs" data-name-zh="恐龍" data-name-en="Dinosaurs" data-name-ja="恐竜">🦖 恐龍</button>
-            <button class="tab-btn" data-category="household" data-name-zh="物品" data-name-en="Household" data-name-ja="日用品">🪑 物品</button>
-            <button class="tab-btn" data-category="shapes" data-name-zh="形狀" data-name-en="Shapes" data-name-ja="形">🔺 形狀</button>
-            <button class="tab-btn" data-category="numbers" data-name-zh="數字" data-name-en="Numbers" data-name-ja="数字">🔢 數字</button>
-            <button class="tab-btn" data-category="letters" data-name-zh="字母" data-name-en="Letters" data-name-ja="アルファベット">🔠 字母</button>
+        <!-- 第一層：大廳 (Lobby) -->
+        <div id="lobby-container" class="view-container">
+            <h2 id="lobby-title" class="lobby-title">選擇一個主題開始探索吧！</h2>
+            <div class="category-grid">
+                <button class="cat-card" data-category="animals" data-name-zh="動物" data-name-en="Animals" data-name-ja="動物">🐻<br><span>動物</span></button>
+                <button class="cat-card" data-category="pets" data-name-zh="寵物" data-name-en="Pets" data-name-ja="ペット">🐶<br><span>寵物</span></button>
+                <button class="cat-card" data-category="ocean" data-name-zh="海洋" data-name-en="Ocean" data-name-ja="海">🐠<br><span>海洋</span></button>
+                <button class="cat-card" data-category="vehicles" data-name-zh="交通" data-name-en="Vehicles" data-name-ja="乗り物">🚗<br><span>交通</span></button>
+                <button class="cat-card" data-category="fruits" data-name-zh="蔬果" data-name-en="Fruits" data-name-ja="果物">🍎<br><span>蔬果</span></button>
+                <button class="cat-card" data-category="insects" data-name-zh="昆蟲" data-name-en="Insects" data-name-ja="昆虫">🐛<br><span>昆蟲</span></button>
+                <button class="cat-card" data-category="dinosaurs" data-name-zh="恐龍" data-name-en="Dinosaurs" data-name-ja="恐竜">🦖<br><span>恐龍</span></button>
+                <button class="cat-card" data-category="household" data-name-zh="物品" data-name-en="Household" data-name-ja="日用品">🪑<br><span>物品</span></button>
+                <button class="cat-card" data-category="shapes" data-name-zh="形狀" data-name-en="Shapes" data-name-ja="形">🔺<br><span>形狀</span></button>
+                <button class="cat-card" data-category="numbers" data-name-zh="數字" data-name-en="Numbers" data-name-ja="数字">🔢<br><span>數字</span></button>
+                <button class="cat-card" data-category="letters" data-name-zh="字母" data-name-en="Letters" data-name-ja="アルファベット">🔠<br><span>字母</span></button>
+            </div>
         </div>
 
-        <!-- 主題展示區 -->
-        <div class="main-display">
-            <!-- 換上一個/下一個功能，因為修改為隨機，直接統一為換一個也可以，但保留箭頭習慣 -->
-            <button id="prev-btn" class="nav-btn">◀</button>
-
-            <div id="card" class="interactive-card glass-card">
-                <div id="item-emoji" class="emoji-display">🐘</div>
-                <div id="item-name" class="name-display">大象</div>
+        <!-- 第二層：主遊戲畫面 (Game) -->
+        <div id="game-container" class="view-container hidden">
+            <!-- 導航列 -->
+            <div class="game-nav">
+                <button id="back-btn" class="back-btn">🔙</button>
+                <span id="current-category-name" class="category-title">動物</span>
             </div>
 
-            <button id="next-btn" class="nav-btn">▶</button>
-        </div>
+            <!-- 主題展示區 -->
+            <div class="main-display">
+                <button id="prev-btn" class="nav-btn">◀</button>
+                
+                <div id="card" class="glass-card">
+                    <div id="item-emoji" class="emoji-display">🐘</div>
+                    <div id="item-name" class="name-display">大象</div>
+                </div>
 
+                <button id="next-btn" class="nav-btn">▶</button>
+            </div>
+        </div>
     </div>
 
     <!-- 匯入第三方高品質 SVG 向量圖示庫 (Twemoji) -->
