@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>寶寶認識世界</title>
     <!-- 使用 Google Fonts 提供更活潑的字體 -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@700&display=swap"
+        rel="stylesheet">
     <!-- 引入 Canvas Confetti 函式庫 -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- 開頭畫面：必須由使用者點擊才能解鎖瀏覽器語音播放限制 -->
     <div id="start-overlay" class="overlay">
         <h1>👋 嗨！</h1>
-        <p>歡迎來到五彩繽紛的世界</p>
+        <p>歡迎來到萌嵐的五彩繽紛的世界</p>
         <button id="start-btn">開始玩囉！</button>
     </div>
 
     <!-- 主遊戲畫面 -->
     <div id="game-container" class="hidden">
-        
+
         <!-- 分類切換區：支援左右滑動以容納多個分類 -->
         <div class="category-tabs">
             <button class="tab-btn active" data-category="animals" data-name="動物">🐻 動物</button>
+            <button class="tab-btn" data-category="pets" data-name="寵物">🐶 寵物</button>
+            <button class="tab-btn" data-category="ocean" data-name="海洋世界">🐠 海洋</button>
             <button class="tab-btn" data-category="vehicles" data-name="交通工具">🚗 交通</button>
             <button class="tab-btn" data-category="fruits" data-name="水果蔬菜">🍎 蔬果</button>
             <button class="tab-btn" data-category="insects" data-name="昆蟲">🐛 昆蟲</button>
@@ -38,7 +43,7 @@
         <div class="main-display">
             <!-- 換上一個/下一個功能，因為修改為隨機，直接統一為換一個也可以，但保留箭頭習慣 -->
             <button id="prev-btn" class="nav-btn">◀</button>
-            
+
             <div id="card" class="interactive-card glass-card">
                 <div id="item-emoji" class="emoji-display">🐘</div>
                 <div id="item-name" class="name-display">大象</div>
@@ -46,14 +51,15 @@
 
             <button id="next-btn" class="nav-btn">▶</button>
         </div>
-        
+
     </div>
 
     <!-- 匯入第三方高品質 SVG 向量圖示庫 (Twemoji) -->
     <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
-    
+
     <!-- 匯入資料庫 -->
     <script src="data.js"></script>
     <script src="main.js"></script>
 </body>
+
 </html>

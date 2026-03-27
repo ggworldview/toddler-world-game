@@ -13,7 +13,9 @@ const bgLibrary = {
     numbers: ['bg_classroom.png', 'bg_math.png'],
     letters: ['bg_library.png', 'bg_nursery.png'],
     household: ['bg_livingroom.png', 'bg_bedroom.png', 'bg_kitchen.png'],
-    fruits: ['bg_kitchen.png', 'bg_farm.png', 'bg_garden.png', 'bg_plains.png']
+    fruits: ['bg_kitchen.png', 'bg_farm.png', 'bg_garden.png', 'bg_plains.png'],
+    pets: ['bg_livingroom.png', 'bg_garden.png'],
+    ocean: ['bg_beach.png', 'bg_river.png', 'bg_underwater.png']
 };
 
 // DOM Elements
@@ -32,11 +34,15 @@ function initGame() {
     startOverlay.classList.add('hidden');
     gameContainer.classList.remove('hidden');
     
-    // 初始化發聲 (解鎖瀏覽器音效)
-    speak('開始隨機大冒險！');
-    
     // 設定初始背景與畫面
     applyBackground(currentCategory);
+    
+    // 遊戲開始時，隨機選取第一張卡片
+    if (gameData[currentCategory] && gameData[currentCategory].length > 0) {
+        currentIndex = Math.floor(Math.random() * gameData[currentCategory].length);
+    }
+    pickSequentialItem('none');
+    
     // 初始進入先掃描將畫面的分類標籤繪本化
     twemoji.parse(document.body, { ext: '.svg', folder: 'svg' });
 }
@@ -130,8 +136,12 @@ tabBtns.forEach(btn => {
         // 變更背景
         applyBackground(currentCategory);
         
-        // 切換類別時，將索引歸零，從第一張開始順序看
-        currentIndex = 0;
+        // 切換類別時，改為隨機抽取該分類的新起點
+        if (gameData[currentCategory] && gameData[currentCategory].length > 0) {
+            currentIndex = Math.floor(Math.random() * gameData[currentCategory].length);
+        } else {
+            currentIndex = 0;
+        }
         pickSequentialItem('none');
     });
 });

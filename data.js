@@ -41,6 +41,10 @@ const animals = [
         "name": "犀牛"
     },
     {
+        "img": "./assets/z_animals_大象.jpg",
+        "name": "大象"
+    },
+    {
         "img": "./assets/z_animals_河馬.jpg",
         "name": "河馬"
     },
@@ -199,6 +203,222 @@ const animals = [
     {
         "img": "./assets/z_animals_水獺.jpg",
         "name": "水獺"
+    }
+];
+const pets = [
+    {
+        "img": "./assets/z_pets_波斯貓.jpg",
+        "name": "波斯貓"
+    },
+    {
+        "img": "./assets/z_pets_布偶貓.jpg",
+        "name": "布偶貓"
+    },
+    {
+        "img": "./assets/z_pets_英國短毛貓.jpg",
+        "name": "英國短毛貓"
+    },
+    {
+        "img": "./assets/z_pets_暹羅貓.jpg",
+        "name": "暹羅貓"
+    },
+    {
+        "img": "./assets/z_pets_蘇格蘭摺耳貓.jpg",
+        "name": "蘇格蘭摺耳貓"
+    },
+    {
+        "img": "./assets/z_pets_黃金獵犬.jpg",
+        "name": "黃金獵犬"
+    },
+    {
+        "img": "./assets/z_pets_拉布拉多.jpg",
+        "name": "拉布拉多"
+    },
+    {
+        "img": "./assets/z_pets_貴賓狗.jpg",
+        "name": "貴賓狗"
+    },
+    {
+        "img": "./assets/z_pets_柴犬.jpg",
+        "name": "柴犬"
+    },
+    {
+        "img": "./assets/z_pets_柯基.jpg",
+        "name": "柯基"
+    },
+    {
+        "img": "./assets/z_pets_哈士奇.jpg",
+        "name": "哈士奇"
+    },
+    {
+        "img": "./assets/z_pets_法鬥.jpg",
+        "name": "法鬥"
+    },
+    {
+        "img": "./assets/z_pets_吉娃娃.jpg",
+        "name": "吉娃娃"
+    },
+    {
+        "img": "./assets/z_pets_黃金鼠.jpg",
+        "name": "黃金鼠"
+    },
+    {
+        "img": "./assets/z_pets_龍貓.jpg",
+        "name": "龍貓"
+    },
+    {
+        "img": "./assets/z_pets_玄鳳鸚鵡.jpg",
+        "name": "玄鳳鸚鵡"
+    },
+    {
+        "img": "./assets/z_pets_虎皮鸚鵡.jpg",
+        "name": "虎皮鸚鵡"
+    },
+    {
+        "img": "./assets/z_pets_文鳥.jpg",
+        "name": "文鳥"
+    },
+    {
+        "img": "./assets/z_pets_綠鬣蜥.jpg",
+        "name": "綠鬣蜥"
+    },
+    {
+        "img": "./assets/z_pets_紅耳龜.jpg",
+        "name": "紅耳龜"
+    },
+    {
+        "img": "./assets/z_pets_金魚.jpg",
+        "name": "金魚"
+    },
+    {
+        "img": "./assets/z_pets_鬥魚.jpg",
+        "name": "鬥魚"
+    }
+];
+const ocean = [
+    {
+        "img": "./assets/z_ocean_虎鯨.jpg",
+        "name": "虎鯨"
+    },
+    {
+        "img": "./assets/z_ocean_抹香鯨.jpg",
+        "name": "抹香鯨"
+    },
+    {
+        "img": "./assets/z_ocean_藍鯨.jpg",
+        "name": "藍鯨"
+    },
+    {
+        "img": "./assets/z_ocean_座頭鯨.jpg",
+        "name": "座頭鯨"
+    },
+    {
+        "img": "./assets/z_ocean_大白鯊.jpg",
+        "name": "大白鯊"
+    },
+    {
+        "img": "./assets/z_ocean_鯨鯊.jpg",
+        "name": "鯨鯊"
+    },
+    {
+        "img": "./assets/z_ocean_錘頭鯊.jpg",
+        "name": "錘頭鯊"
+    },
+    {
+        "img": "./assets/z_ocean_海獅.jpg",
+        "name": "海獅"
+    },
+    {
+        "img": "./assets/z_ocean_海象.jpg",
+        "name": "海象"
+    },
+    {
+        "img": "./assets/z_ocean_海牛.jpg",
+        "name": "海牛"
+    },
+    {
+        "img": "./assets/z_ocean_儒艮.jpg",
+        "name": "儒艮"
+    },
+    {
+        "img": "./assets/z_ocean_鱝.jpg",
+        "name": "鱝"
+    },
+    {
+        "img": "./assets/z_ocean_魟魚.jpg",
+        "name": "魟魚"
+    },
+    {
+        "img": "./assets/z_ocean_海馬.jpg",
+        "name": "海馬"
+    },
+    {
+        "img": "./assets/z_ocean_八爪章魚.jpg",
+        "name": "八爪章魚"
+    },
+    {
+        "img": "./assets/z_ocean_烏賊.jpg",
+        "name": "烏賊"
+    },
+    {
+        "img": "./assets/z_ocean_魷魚.jpg",
+        "name": "魷魚"
+    },
+    {
+        "img": "./assets/z_ocean_龍蝦.jpg",
+        "name": "龍蝦"
+    },
+    {
+        "img": "./assets/z_ocean_螃蟹.jpg",
+        "name": "螃蟹"
+    },
+    {
+        "img": "./assets/z_ocean_寄居蟹.jpg",
+        "name": "寄居蟹"
+    },
+    {
+        "img": "./assets/z_ocean_海膽.jpg",
+        "name": "海膽"
+    },
+    {
+        "img": "./assets/z_ocean_海星.jpg",
+        "name": "海星"
+    },
+    {
+        "img": "./assets/z_ocean_海參.jpg",
+        "name": "海參"
+    },
+    {
+        "img": "./assets/z_ocean_水母.jpg",
+        "name": "水母"
+    },
+    {
+        "img": "./assets/z_ocean_海葵.jpg",
+        "name": "海葵"
+    },
+    {
+        "img": "./assets/z_ocean_小丑魚.jpg",
+        "name": "小丑魚"
+    },
+    {
+        "img": "./assets/z_ocean_擬刺尾鯛.jpg",
+        "name": "擬刺尾鯛"
+    },
+    {
+        "img": "./assets/z_ocean_獅子魚.jpg",
+        "name": "獅子魚"
+    },
+    {
+        "img": "./assets/z_ocean_海豚.jpg",
+        "name": "海豚"
+    },
+    {
+        "img": "./assets/z_ocean_綠蠵龜.jpg",
+        "name": "綠蠵龜"
+    },
+    {
+        "img": "./assets/z_ocean_玳瑁.jpg",
+        "name": "玳瑁"
     }
 ];
 const vehicles = [
@@ -1032,4 +1252,4 @@ const numbers = [
 ];
 const letters = [];
 
-const gameData = { animals, vehicles, household, fruits, insects, dinosaurs, shapes, numbers, letters };
+const gameData = { animals, pets, ocean, vehicles, household, fruits, insects, dinosaurs, shapes, numbers, letters };
