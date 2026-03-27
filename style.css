@@ -118,12 +118,22 @@ body {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .lang-btn.active {
     background: #ff006e;
     transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(255, 0, 110, 0.3);
+}
+
+/* 確保國旗在解析後的 Twemoji 狀態依然顯示 */
+.lang-btn img.emoji {
+    width: 2.2rem;
+    height: 2.2rem;
+    display: block;
 }
 
 /* 大廳樣式 */
@@ -163,12 +173,6 @@ body {
     color: #4a4e69;
     font-weight: 600;
     margin-top: 8px;
-}
-
-.cat-card:hover {
-    transform: translateY(-5px);
-    background: white;
-    border-color: #ffbe0b;
 }
 
 /* 遊戲畫面導航 */

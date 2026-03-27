@@ -4,10 +4,11 @@ let currentIndex = 0;
 let clickCount = 0;
 let currentLang = 'zh'; // 'zh', 'en', 'ja'
 
-// ====== 新增多重場景圖庫 (預留給未來 AI 宮崎駿算圖) ======
+// ====== 新增多重場景圖庫 (導入宮崎駿吉卜力風格背景) ======
 const bgLibrary = {
-    animals: ['bg_savanna.png', 'bg_forest.png', 'bg_desert.png', 'bg_plains.png'],
-    vehicles: ['bg_airport.png', 'bg_city.png', 'bg_farm.png', 'bg_highway.png'],
+    animals: ['bg_ghibli_animals.png', 'bg_savanna.png', 'bg_forest.png', 'bg_desert.png', 'bg_plains.png'],
+    vehicles: ['bg_ghibli_vehicles.png', 'bg_airport.png', 'bg_city.png', 'bg_farm.png', 'bg_highway.png'],
+    ocean: ['bg_ghibli_ocean.png', 'bg_beach.png', 'bg_river.png', 'bg_underwater.png'],
     insects: ['bg_leaf.png', 'bg_garden.png', 'bg_treetrunk.png'],
     dinosaurs: ['bg_volcano.png', 'bg_jungle.png', 'bg_river.png'],
     shapes: ['bg_pastel.png', 'bg_chalkboard.png', 'bg_starry.png'],
@@ -15,8 +16,7 @@ const bgLibrary = {
     letters: ['bg_library.png', 'bg_nursery.png'],
     household: ['bg_livingroom.png', 'bg_bedroom.png', 'bg_kitchen.png'],
     fruits: ['bg_kitchen.png', 'bg_farm.png', 'bg_garden.png', 'bg_plains.png'],
-    pets: ['bg_livingroom.png', 'bg_garden.png'],
-    ocean: ['bg_beach.png', 'bg_river.png', 'bg_underwater.png']
+    pets: ['bg_livingroom.png', 'bg_garden.png']
 };
 
 // DOM Elements
