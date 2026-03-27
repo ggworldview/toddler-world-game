@@ -2,6 +2,7 @@
 let currentCategory = 'animals';
 let currentIndex = 0;
 let clickCount = 0;
+let currentLang = 'zh'; // 'zh', 'en', 'ja'
 
 // ====== 新增多重場景圖庫 (預留給未來 AI 宮崎駿算圖) ======
 const bgLibrary = {
@@ -28,6 +29,7 @@ const btnNext = document.getElementById('next-btn');
 const card = document.getElementById('card');
 const itemEmoji = document.getElementById('item-emoji');
 const itemName = document.getElementById('item-name');
+const langBtns = document.querySelectorAll('.lang-btn');
 
 // Initialize Game
 function initGame() {
@@ -71,7 +73,7 @@ function pickSequentialItem(direction = 'next') {
     }
     
     updateDisplay();
-    speak(list[currentIndex].name);
+    speak(list[currentIndex]['name_' + currentLang] || list[currentIndex].name_zh);
 }
 
 // 更新卡片畫面
@@ -81,7 +83,9 @@ function updateDisplay() {
     
     if(!item) return;
 
-    itemName.textContent = item.name;
+    // 根據目前的語系狀態，顯示對應的名稱
+    const textToShow = item['name_' + currentLang] || item.name_zh;
+    itemName.textContent = textToShow;
     
     if (item.img) {
         // 採用直接掛載透明背板照片的模式
@@ -103,8 +107,19 @@ function speak(text) {
         window.speechSynthesis.cancel(); // 停止先前的語音
         const msg = new SpeechSynthesisUtterance();
         msg.text = text;
-        msg.lang = 'zh-TW'; // 設定為中文台灣
-        msg.rate = 0.9; // 語速稍微放慢適合幼兒
+        
+        // 根據國籍切換最佳發音引擎配置
+        if (currentLang === 'en') {
+            msg.lang = 'en-US';
+            msg.rate = 0.85; // 英文稍微放慢聽得更清楚
+        } else if (currentLang === 'ja') {
+            msg.lang = 'ja-JP';
+            msg.rate = 0.85;
+        } else {
+            msg.lang = 'zh-TW';
+            msg.rate = 0.9;
+        }
+        
         msg.pitch = 1.2; // 語調稍微提高比較活潑
         window.speechSynthesis.speak(msg);
     }
@@ -122,6 +137,50 @@ function triggerReward() {
 
 // Event Listeners
 startBtn.addEventListener('click', initGame);
+
+// 註冊語言切換
+langBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        currentLang = btn.getAttribute('data-lang');
+        
+        // 更新 UI active 狀態
+        langBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // 全域刷新 Tabs 文字
+        tabBtns.forEach(tb => {
+            const textContent = tb.getAttribute('data-name-' + currentLang) || tb.getAttribute('data-name-zh');
+            const icon = tb.innerHTML.split(' ')[0]; // 擷取前端的 emoji
+            tb.innerHTML = `${icon} ${textContent}`;
+        });
+        
+        // 全域刷新 Welcome 文字
+        const welcomeText = document.getElementById('welcome-text');
+        if (welcomeText) {
+            if (currentLang === 'en') welcomeText.textContent = "Welcome to Menglan's Colorful World";
+            else if (currentLang === 'ja') welcomeText.textContent = "モンランのカラフルな世界へようこそ";
+            else welcomeText.textContent = "歡迎來到萌嵐的五彩繽紛的世界";
+        }
+        
+        const startBtnElem = document.getElementById('start-btn');
+        if (startBtnElem) {
+            if (currentLang === 'en') startBtnElem.textContent = "Let's Play!";
+            else if (currentLang === 'ja') startBtnElem.textContent = "あそぼう！";
+            else startBtnElem.textContent = "開始玩囉！";
+        }
+        
+        // 刷新當前卡片顯示內容
+        updateDisplay();
+        
+        // 如果已經進入遊戲，直接發音新預設語言
+        if (!gameContainer.classList.contains('hidden')) {
+            const list = gameData[currentCategory];
+            if(list && list[currentIndex]) {
+                speak(list[currentIndex]['name_' + currentLang] || list[currentIndex].name_zh);
+            }
+        }
+    });
+});
 
 // 註冊所有標籤按鈕的點擊事件
 tabBtns.forEach(btn => {
@@ -187,7 +246,7 @@ card.addEventListener('click', () => {
     const item = list[currentIndex];
     
     // 唸出名稱
-    speak(item.name);
+    speak(item['name_' + currentLang] || item.name_zh);
     
     // 增加點擊次數
     clickCount++;

@@ -163,6 +163,33 @@ body {
     border: 6px solid rgba(255,255,255,0.8);
     cursor: pointer;
     transition: transform 0.3s;
+    touch-action: pan-y; /* fix swipe behaviour on mobile */
+}
+
+/* 語言切換選單 */
+.lang-selector {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+.lang-btn {
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+}
+.lang-btn.active {
+    background: #ff006e;
+    color: white;
+    transform: scale(1.1);
 }
 
 /* 點擊後的彈跳動畫 class */

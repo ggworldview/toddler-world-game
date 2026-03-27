@@ -21,26 +21,33 @@
     <!-- 開頭畫面：必須由使用者點擊才能解鎖瀏覽器語音播放限制 -->
     <div id="start-overlay" class="overlay">
         <h1>👋 嗨！</h1>
-        <p>歡迎來到萌嵐的五彩繽紛的世界</p>
+        <p id="welcome-text">歡迎來到萌嵐的五彩繽紛的世界</p>
         <button id="start-btn">開始玩囉！</button>
     </div>
 
     <!-- 主遊戲畫面 -->
     <div id="game-container" class="hidden">
 
+        <!-- 語言切換選單 -->
+        <div id="lang-selector" class="lang-selector">
+            <button class="lang-btn active" data-lang="zh">🇹🇼</button>
+            <button class="lang-btn" data-lang="en">🇺🇸</button>
+            <button class="lang-btn" data-lang="ja">🇯🇵</button>
+        </div>
+
         <!-- 分類切換區：支援左右滑動以容納多個分類 -->
         <div class="category-tabs">
-            <button class="tab-btn active" data-category="animals" data-name="動物">🐻 動物</button>
-            <button class="tab-btn" data-category="pets" data-name="寵物">🐶 寵物</button>
-            <button class="tab-btn" data-category="ocean" data-name="海洋世界">🐠 海洋</button>
-            <button class="tab-btn" data-category="vehicles" data-name="交通工具">🚗 交通</button>
-            <button class="tab-btn" data-category="fruits" data-name="水果蔬菜">🍎 蔬果</button>
-            <button class="tab-btn" data-category="insects" data-name="昆蟲">🐛 昆蟲</button>
-            <button class="tab-btn" data-category="dinosaurs" data-name="恐龍">🦖 恐龍</button>
-            <button class="tab-btn" data-category="household" data-name="家庭用品">🪑 物品</button>
-            <button class="tab-btn" data-category="shapes" data-name="形狀">🔺 形狀</button>
-            <button class="tab-btn" data-category="numbers" data-name="數字">🔢 數字</button>
-            <button class="tab-btn" data-category="letters" data-name="英文字母">🔠 字母</button>
+            <button class="tab-btn active" data-category="animals" data-name-zh="動物" data-name-en="Animals" data-name-ja="動物">🐻 動物</button>
+            <button class="tab-btn" data-category="pets" data-name-zh="寵物" data-name-en="Pets" data-name-ja="ペット">🐶 寵物</button>
+            <button class="tab-btn" data-category="ocean" data-name-zh="海洋" data-name-en="Ocean" data-name-ja="海">🐠 海洋</button>
+            <button class="tab-btn" data-category="vehicles" data-name-zh="交通" data-name-en="Vehicles" data-name-ja="乗り物">🚗 交通</button>
+            <button class="tab-btn" data-category="fruits" data-name-zh="蔬果" data-name-en="Fruits" data-name-ja="果物">🍎 蔬果</button>
+            <button class="tab-btn" data-category="insects" data-name-zh="昆蟲" data-name-en="Insects" data-name-ja="昆虫">🐛 昆蟲</button>
+            <button class="tab-btn" data-category="dinosaurs" data-name-zh="恐龍" data-name-en="Dinosaurs" data-name-ja="恐竜">🦖 恐龍</button>
+            <button class="tab-btn" data-category="household" data-name-zh="物品" data-name-en="Household" data-name-ja="日用品">🪑 物品</button>
+            <button class="tab-btn" data-category="shapes" data-name-zh="形狀" data-name-en="Shapes" data-name-ja="形">🔺 形狀</button>
+            <button class="tab-btn" data-category="numbers" data-name-zh="數字" data-name-en="Numbers" data-name-ja="数字">🔢 數字</button>
+            <button class="tab-btn" data-category="letters" data-name-zh="字母" data-name-en="Letters" data-name-ja="アルファベット">🔠 字母</button>
         </div>
 
         <!-- 主題展示區 -->
