@@ -3,20 +3,21 @@ let currentCategory = 'animals';
 let currentIndex = 0;
 let clickCount = 0;
 let currentLang = 'zh'; // 'zh', 'en', 'ja'
+let cardChangeCounter = 0; // 換景計數器
 
-// ====== 新增多重場景圖庫 (導入宮崎駿吉卜力風格背景) ======
+// ====== 新增多重場景圖庫 (全面導入宮崎駿吉卜力風格背景) ======
 const bgLibrary = {
-    animals: ['bg_ghibli_animals.png', 'bg_savanna.png', 'bg_forest.png', 'bg_desert.png', 'bg_plains.png'],
-    vehicles: ['bg_ghibli_vehicles.png', 'bg_airport.png', 'bg_city.png', 'bg_farm.png', 'bg_highway.png'],
-    ocean: ['bg_ghibli_ocean.png', 'bg_beach.png', 'bg_river.png', 'bg_underwater.png'],
-    insects: ['bg_leaf.png', 'bg_garden.png', 'bg_treetrunk.png'],
-    dinosaurs: ['bg_volcano.png', 'bg_jungle.png', 'bg_river.png'],
+    animals: ['bg_ghibli_animals.png', 'bg_ghibli_nature.png', 'bg_savanna.png', 'bg_forest.png'],
+    vehicles: ['bg_ghibli_vehicles.png', 'bg_ghibli_road.png', 'bg_airport.png', 'bg_city.png'],
+    ocean: ['bg_ghibli_ocean.png', 'bg_beach.png', 'bg_underwater.png'],
+    pets: ['bg_ghibli_pets.png', 'bg_ghibli_room.png', 'bg_livingroom.png', 'bg_garden.png'],
+    fruits: ['bg_ghibli_fruits.png', 'bg_kitchen.png', 'bg_farm.png'],
+    dinosaurs: ['bg_ghibli_dinosaurs.png', 'bg_volcano.png', 'bg_jungle.png'],
+    insects: ['bg_ghibli_insects.png', 'bg_leaf.png', 'bg_garden.png'],
+    household: ['bg_ghibli_household.png', 'bg_ghibli_room.png', 'bg_livingroom.png', 'bg_kitchen.png'],
     shapes: ['bg_pastel.png', 'bg_chalkboard.png', 'bg_starry.png'],
     numbers: ['bg_classroom.png', 'bg_math.png'],
-    letters: ['bg_library.png', 'bg_nursery.png'],
-    household: ['bg_livingroom.png', 'bg_bedroom.png', 'bg_kitchen.png'],
-    fruits: ['bg_kitchen.png', 'bg_farm.png', 'bg_garden.png', 'bg_plains.png'],
-    pets: ['bg_livingroom.png', 'bg_garden.png']
+    letters: ['bg_library.png', 'bg_nursery.png']
 };
 
 // DOM Elements
@@ -58,6 +59,9 @@ function showGame(category) {
     currentCategory = category;
     lobbyContainer.classList.add('hidden');
     gameContainer.classList.remove('hidden');
+    
+    // 重設換景計數器
+    cardChangeCounter = 0;
     
     // 設定分類名稱標題
     updateCategoryTitle();
@@ -108,7 +112,9 @@ function refreshLobbyText() {
 // 切換背景
 function applyBackground(category) {
     const list = bgLibrary[category] || ['bg_default.jpg'];
-    const randomBg = list[Math.floor(Math.random() * list.length)];
+    // 隨機挑選一張
+    let randomBg = list[Math.floor(Math.random() * list.length)];
+    
     const defaultGradient = `linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)`;
     document.body.style.background = `url('./assets/backgrounds/${randomBg}') center/cover no-repeat, ${defaultGradient}`;
 }
@@ -122,6 +128,13 @@ function pickSequentialItem(direction = 'next') {
         currentIndex = (currentIndex + 1) % list.length;
     } else if (direction === 'prev') {
         currentIndex = (currentIndex - 1 + list.length) % list.length;
+    }
+    
+    // 換景邏輯：每切換 7 次更換一次背景
+    cardChangeCounter++;
+    if (cardChangeCounter >= 7) {
+        applyBackground(currentCategory);
+        cardChangeCounter = 0;
     }
     
     updateDisplay();

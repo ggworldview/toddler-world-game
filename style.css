@@ -278,12 +278,13 @@ body {
 }
 
 #item-emoji .custom-card-img {
-    width: 19rem;
-    height: 19rem;
-    object-fit: cover;
-    border-radius: 30px;
-    border: 8px solid white;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    width: 20rem;
+    height: 20rem;
+    object-fit: contain;
+    border-radius: 35px;
+    border: 10px solid white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background-color: #f8f9fa; /* 為 contain 模式增加淺色底色，讓比例不合的照片也好看 */
 }
 
 /* 動畫 */
@@ -315,13 +316,19 @@ body {
     100% { transform: translateX(0); opacity: 1; }
 }
 
-/* 手機版網格強制 2 列 */
+/* 手機版佈局優化 */
 @media (max-width: 480px) {
+    .nav-btn {
+        display: none !important; /* 手機版隱藏按鈕，全靠滑動 */
+    }
+    .main-display {
+        gap: 0;
+    }
     .category-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    .emoji-display { font-size: 8rem; }
-    #item-emoji .emoji, #item-emoji .custom-card-img { width: 13rem; height: 13rem; }
-    .name-display { font-size: 3rem; }
-    .glass-card { height: 50vh; min-height: 350px; }
+    .emoji-display { font-size: 10rem; }
+    #item-emoji .emoji, #item-emoji .custom-card-img { width: 17rem; height: 17rem; }
+    .name-display { font-size: 3.5rem; }
+    .glass-card { height: 75vh; width: 92vw; min-height: 420px; padding: 20px 10px; }
 }
