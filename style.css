@@ -228,9 +228,9 @@ body {
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.5); /* 提升通透感 */
+    backdrop-filter: blur(25px); /* 強化毛玻璃質感 */
+    -webkit-backdrop-filter: blur(25px);
     border-radius: 35px;
     display: flex;
     flex-direction: column;

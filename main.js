@@ -5,28 +5,36 @@ let clickCount = 0;
 let currentLang = 'zh'; // 'zh', 'en', 'ja'
 let cardChangeCounter = 0; // 換景計數器
 
-// 🧼 完美擴張後的吉卜力背景圖庫 (20張大師級場景)
-const bgLibrary = {
-    animals: ['bg_ghibli_animals.png', 'bg_ghibli_nature.png', 'bg_ghibli_mountain.png'],
-    vehicles: ['bg_ghibli_vehicles.png', 'bg_ghibli_road.png', 'bg_ghibli_construction.png', 'bg_ghibli_city.png'],
-    ocean: ['bg_ghibli_ocean.png', 'bg_ghibli_underwater.png'],
-    pets: ['bg_ghibli_room.png', 'bg_ghibli_pets.png', 'bg_ghibli_household.png'],
-    fruits: ['bg_ghibli_fruits.png', 'bg_ghibli_nature.png'],
-    dinosaurs: ['bg_ghibli_dinosaurs.png', 'bg_ghibli_mountain.png', 'bg_ghibli_desert.png'],
-    insects: ['bg_ghibli_insects.png', 'bg_ghibli_nature.png'],
-    household: ['bg_ghibli_household.png', 'bg_ghibli_room.png'],
-    shapes: ['bg_ghibli_nature.png', 'bg_ghibli_statue.png'],
-    numbers: ['bg_ghibli_room.png', 'bg_ghibli_taipei101.png'],
-    letters: ['bg_ghibli_nature.png', 'bg_ghibli_fuji.png'],
-    // 額外混合場景
-    winter: ['bg_ghibli_snow.png']
-};
+// 🌍 全域稀有背景 (Wildcards)：有機率出現在任何類別中
+const globalBgs = [
+    'bg_ghibli_taipei101.png', 
+    'bg_ghibli_fuji.png', 
+    'bg_ghibli_statue.png', 
+    'bg_ghibli_city.png'
+];
 
-// 特殊類別對應 (針對特定主題加強)
-const categoryBgs = {
-    'ocean': ['bg_ghibli_ocean.png', 'bg_ghibli_underwater.png'],
-    'dinosaurs': ['bg_ghibli_dinosaurs.png', 'bg_ghibli_desert.png', 'bg_ghibli_mountain.png'],
-    'vehicles': ['bg_ghibli_vehicles.png', 'bg_ghibli_road.png', 'bg_ghibli_construction.png', 'bg_ghibli_taipei101.png', 'bg_ghibli_city.png', 'bg_ghibli_statue.png', 'bg_ghibli_fuji.png']
+// 🧼 精準分類後的吉卜力背景圖庫
+const bgLibrary = {
+    animals: ['bg_ghibli_animals.png', 'bg_ghibli_nature.png'],
+    pets: ['bg_ghibli_room.png', 'bg_ghibli_pets.png'],
+    ocean: ['bg_ghibli_ocean.png', 'bg_ghibli_underwater.png'], // 鎖定水下與鐵軌
+    vehicles: [
+        'bg_ghibli_vehicles.png', 
+        'bg_ghibli_road.png', 
+        'bg_ghibli_construction.png', 
+        'bg_ghibli_snow.png' // 北海道雪原歸類至此
+    ],
+    fruits: ['bg_ghibli_fruits.png', 'bg_ghibli_nature.png'],
+    insects: ['bg_ghibli_insects.png', 'bg_ghibli_nature.png'],
+    dinosaurs: [
+        'bg_ghibli_dinosaurs.png', 
+        'bg_ghibli_desert.png', // 沙漠鎖定在此
+        'bg_ghibli_mountain.png'
+    ],
+    household: ['bg_ghibli_household.png', 'bg_ghibli_room.png'],
+    shapes: ['bg_ghibli_nature.png'],
+    numbers: ['bg_ghibli_room.png'],
+    letters: ['bg_ghibli_nature.png']
 };
 
 // DOM Elements
@@ -56,7 +64,6 @@ function initGame() {
 function showLobby() {
     lobbyContainer.classList.remove('hidden');
     gameContainer.classList.add('hidden');
-    // 大廳背景使用平和的暖白色或輕盈漸層
     document.body.style.background = `#f7f7f7`;
     document.body.style.backgroundImage = `linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)`;
     
@@ -112,19 +119,22 @@ function refreshLobbyText() {
     }
 }
 
-// 切換背景 (徹底移除藍色底，僅留米白色緩衝底)
+// 核心背景決策引擎 (精準歸類 + 全域隨機)
 function applyBackground(category) {
-    // 優先從分類對應庫中選取，若無則從大庫隨機選取
-    const list = categoryBgs[category] || bgLibrary[category] || ['bg_ghibli_nature.png'];
-    let randomBg = list[Math.floor(Math.random() * list.length)];
+    let list = bgLibrary[category] || ['bg_ghibli_nature.png'];
     
-    // 增加雪地機制 (如果是數字或字母，偶爾出雪景)
-    if ((category === 'numbers' || category === 'letters') && Math.random() > 0.7) {
-        randomBg = 'bg_ghibli_snow.png';
+    // 25% 的機率觸發「全域稀有場景」(101, 富士山, 紐約)
+    if (Math.random() < 0.25) {
+        const randomGlobal = globalBgs[Math.floor(Math.random() * globalBgs.length)];
+        renderBackground(randomGlobal);
+    } else {
+        const randomCategoryBg = list[Math.floor(Math.random() * list.length)];
+        renderBackground(randomCategoryBg);
     }
+}
 
-    const bgUrl = `./assets/backgrounds/${randomBg}`;
-    // 移除藍底，改用純色背景作為緩衝，視覺更純淨
+function renderBackground(bgFileName) {
+    const bgUrl = `./assets/backgrounds/${bgFileName}`;
     document.body.style.background = `url('${bgUrl}') center/cover no-repeat, #f7f7f7`;
     document.body.style.backgroundAttachment = 'fixed';
 }
@@ -141,6 +151,7 @@ function pickSequentialItem(direction = 'next') {
     }
     
     cardChangeCounter++;
+    // 每 7 次更換背景，這時也會觸發 25% 的全域機率
     if (cardChangeCounter >= 7) {
         applyBackground(currentCategory);
         cardChangeCounter = 0;
