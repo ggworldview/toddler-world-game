@@ -32,7 +32,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: url('./assets/menglan_welcome.jpg') center/cover no-repeat; /* 萌嵐個人化背景 */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,31 +40,53 @@ body {
     z-index: 2000;
 }
 
-.overlay h1 {
-    font-size: 4rem;
-    color: #ff6b6b;
-    margin-bottom: 20px;
+.welcome-glass-panel {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 30px 25px;
+    border-radius: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    width: 90vw;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+}
+
+.overlay h1 {
+    font-size: 3.8rem;
+    color: #ff6b6b;
+    margin-bottom: 15px;
+    text-shadow: 0 4px 15px rgba(255,255,255,0.8), 2px 2px 0 white;
 }
 
 .overlay p {
     font-size: 1.8rem;
-    color: #4a4e69;
-    margin-bottom: 40px;
-    text-align: center;
-    padding: 0 20px;
+    color: #333;
+    margin-bottom: 35px;
+    font-weight: 600;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.9);
 }
 
 #start-btn {
-    font-size: 2.5rem;
-    padding: 15px 40px;
+    font-size: 2.22rem;
+    padding: 18px 50px;
     border-radius: 50px;
-    background-color: #4ecdc4;
+    background: linear-gradient(135deg, #7ad3d1 0%, #4db3b1 100%);
     color: white;
     border: none;
     cursor: pointer;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    box-shadow: 0 10px 30px rgba(77, 179, 177, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: 700;
+}
+
+#start-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(77, 179, 177, 0.5);
 }
 
 /* 視圖切換控制 */
