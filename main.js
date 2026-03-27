@@ -5,19 +5,19 @@ let clickCount = 0;
 let currentLang = 'zh'; // 'zh', 'en', 'ja'
 let cardChangeCounter = 0; // 換景計數器
 
-// ====== 新增多重場景圖庫 (全面導入宮崎駿吉卜力風格背景) ======
+// 🧼 修正後的純淨吉卜力背景圖庫 (確保每個路徑對應現有實體檔案)
 const bgLibrary = {
-    animals: ['bg_ghibli_animals.png', 'bg_ghibli_nature.png', 'bg_savanna.png', 'bg_forest.png'],
-    vehicles: ['bg_ghibli_vehicles.png', 'bg_ghibli_road.png', 'bg_airport.png', 'bg_city.png'],
-    ocean: ['bg_ghibli_ocean.png', 'bg_beach.png', 'bg_underwater.png'],
-    pets: ['bg_ghibli_pets.png', 'bg_ghibli_room.png', 'bg_livingroom.png', 'bg_garden.png'],
-    fruits: ['bg_ghibli_fruits.png', 'bg_kitchen.png', 'bg_farm.png'],
-    dinosaurs: ['bg_ghibli_dinosaurs.png', 'bg_volcano.png', 'bg_jungle.png'],
-    insects: ['bg_ghibli_insects.png', 'bg_leaf.png', 'bg_garden.png'],
-    household: ['bg_ghibli_household.png', 'bg_ghibli_room.png', 'bg_livingroom.png', 'bg_kitchen.png'],
-    shapes: ['bg_pastel.png', 'bg_chalkboard.png', 'bg_starry.png'],
-    numbers: ['bg_classroom.png', 'bg_math.png'],
-    letters: ['bg_library.png', 'bg_nursery.png']
+    animals: ['bg_ghibli_nature.png', 'bg_ghibli_animals.png'],
+    vehicles: ['bg_ghibli_road.png', 'bg_ghibli_vehicles.png'],
+    ocean: ['bg_ghibli_ocean.png'],
+    pets: ['bg_ghibli_room.png', 'bg_ghibli_pets.png'],
+    fruits: ['bg_ghibli_fruits.png'],
+    dinosaurs: ['bg_ghibli_dinosaurs.png'],
+    insects: ['bg_ghibli_insects.png'],
+    household: ['bg_ghibli_room.png', 'bg_ghibli_household.png'],
+    shapes: ['bg_ghibli_nature.png'],
+    numbers: ['bg_ghibli_room.png'],
+    letters: ['bg_ghibli_nature.png']
 };
 
 // DOM Elements
@@ -47,6 +47,7 @@ function initGame() {
 function showLobby() {
     lobbyContainer.classList.remove('hidden');
     gameContainer.classList.add('hidden');
+    // 大廳背景使用專屬漸層
     document.body.style.background = `linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)`;
     
     // 刷新大廳文字 (如果切換語言後回來)
@@ -111,12 +112,16 @@ function refreshLobbyText() {
 
 // 切換背景
 function applyBackground(category) {
-    const list = bgLibrary[category] || ['bg_default.jpg'];
+    const list = bgLibrary[category] || ['bg_ghibli_nature.png'];
     // 隨機挑選一張
     let randomBg = list[Math.floor(Math.random() * list.length)];
     
+    // 使用絕對相對路徑確保 GitHub Pages 正確解析
+    const bgUrl = `./assets/backgrounds/${randomBg}`;
     const defaultGradient = `linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)`;
-    document.body.style.background = `url('./assets/backgrounds/${randomBg}') center/cover no-repeat, ${defaultGradient}`;
+    
+    document.body.style.background = `url('${bgUrl}') center/cover no-repeat, ${defaultGradient}`;
+    document.body.style.backgroundAttachment = 'fixed';
 }
 
 // 順序切換
