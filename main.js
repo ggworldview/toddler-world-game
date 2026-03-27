@@ -5,19 +5,28 @@ let clickCount = 0;
 let currentLang = 'zh'; // 'zh', 'en', 'ja'
 let cardChangeCounter = 0; // 換景計數器
 
-// 🧼 修正後的純淨吉卜力背景圖庫 (確保每個路徑對應現有實體檔案)
+// 🧼 完美擴張後的吉卜力背景圖庫 (20張大師級場景)
 const bgLibrary = {
-    animals: ['bg_ghibli_nature.png', 'bg_ghibli_animals.png'],
-    vehicles: ['bg_ghibli_road.png', 'bg_ghibli_vehicles.png'],
-    ocean: ['bg_ghibli_ocean.png'],
-    pets: ['bg_ghibli_room.png', 'bg_ghibli_pets.png'],
-    fruits: ['bg_ghibli_fruits.png'],
-    dinosaurs: ['bg_ghibli_dinosaurs.png'],
-    insects: ['bg_ghibli_insects.png'],
-    household: ['bg_ghibli_room.png', 'bg_ghibli_household.png'],
-    shapes: ['bg_ghibli_nature.png'],
-    numbers: ['bg_ghibli_room.png'],
-    letters: ['bg_ghibli_nature.png']
+    animals: ['bg_ghibli_animals.png', 'bg_ghibli_nature.png', 'bg_ghibli_mountain.png'],
+    vehicles: ['bg_ghibli_vehicles.png', 'bg_ghibli_road.png', 'bg_ghibli_construction.png', 'bg_ghibli_city.png'],
+    ocean: ['bg_ghibli_ocean.png', 'bg_ghibli_underwater.png'],
+    pets: ['bg_ghibli_room.png', 'bg_ghibli_pets.png', 'bg_ghibli_household.png'],
+    fruits: ['bg_ghibli_fruits.png', 'bg_ghibli_nature.png'],
+    dinosaurs: ['bg_ghibli_dinosaurs.png', 'bg_ghibli_mountain.png', 'bg_ghibli_desert.png'],
+    insects: ['bg_ghibli_insects.png', 'bg_ghibli_nature.png'],
+    household: ['bg_ghibli_household.png', 'bg_ghibli_room.png'],
+    shapes: ['bg_ghibli_nature.png', 'bg_ghibli_statue.png'],
+    numbers: ['bg_ghibli_room.png', 'bg_ghibli_taipei101.png'],
+    letters: ['bg_ghibli_nature.png', 'bg_ghibli_fuji.png'],
+    // 額外混合場景
+    winter: ['bg_ghibli_snow.png']
+};
+
+// 特殊類別對應 (針對特定主題加強)
+const categoryBgs = {
+    'ocean': ['bg_ghibli_ocean.png', 'bg_ghibli_underwater.png'],
+    'dinosaurs': ['bg_ghibli_dinosaurs.png', 'bg_ghibli_desert.png', 'bg_ghibli_mountain.png'],
+    'vehicles': ['bg_ghibli_vehicles.png', 'bg_ghibli_road.png', 'bg_ghibli_construction.png', 'bg_ghibli_taipei101.png', 'bg_ghibli_city.png', 'bg_ghibli_statue.png', 'bg_ghibli_fuji.png']
 };
 
 // DOM Elements
@@ -47,10 +56,10 @@ function initGame() {
 function showLobby() {
     lobbyContainer.classList.remove('hidden');
     gameContainer.classList.add('hidden');
-    // 大廳背景使用專屬漸層
-    document.body.style.background = `linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)`;
+    // 大廳背景使用平和的暖白色或輕盈漸層
+    document.body.style.background = `#f7f7f7`;
+    document.body.style.backgroundImage = `linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)`;
     
-    // 刷新大廳文字 (如果切換語言後回來)
     refreshLobbyText();
     twemoji.parse(document.body, { ext: '.svg', folder: 'svg' });
 }
@@ -61,16 +70,10 @@ function showGame(category) {
     lobbyContainer.classList.add('hidden');
     gameContainer.classList.remove('hidden');
     
-    // 重設換景計數器
     cardChangeCounter = 0;
-    
-    // 設定分類名稱標題
     updateCategoryTitle();
-    
-    // 設定初始背景
     applyBackground(currentCategory);
     
-    // 隨機選取該分類的第一張卡片
     if (gameData[currentCategory] && gameData[currentCategory].length > 0) {
         currentIndex = Math.floor(Math.random() * gameData[currentCategory].length);
     } else {
@@ -78,7 +81,6 @@ function showGame(category) {
     }
     
     updateDisplay();
-    // 進入時唸出名稱
     const list = gameData[currentCategory];
     if (list && list[currentIndex]) {
         speak(list[currentIndex]['name_' + currentLang] || list[currentIndex].name_zh || list[currentIndex].name || "");
@@ -110,17 +112,20 @@ function refreshLobbyText() {
     }
 }
 
-// 切換背景
+// 切換背景 (徹底移除藍色底，僅留米白色緩衝底)
 function applyBackground(category) {
-    const list = bgLibrary[category] || ['bg_ghibli_nature.png'];
-    // 隨機挑選一張
+    // 優先從分類對應庫中選取，若無則從大庫隨機選取
+    const list = categoryBgs[category] || bgLibrary[category] || ['bg_ghibli_nature.png'];
     let randomBg = list[Math.floor(Math.random() * list.length)];
     
-    // 使用絕對相對路徑確保 GitHub Pages 正確解析
+    // 增加雪地機制 (如果是數字或字母，偶爾出雪景)
+    if ((category === 'numbers' || category === 'letters') && Math.random() > 0.7) {
+        randomBg = 'bg_ghibli_snow.png';
+    }
+
     const bgUrl = `./assets/backgrounds/${randomBg}`;
-    const defaultGradient = `linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)`;
-    
-    document.body.style.background = `url('${bgUrl}') center/cover no-repeat, ${defaultGradient}`;
+    // 移除藍底，改用純色背景作為緩衝，視覺更純淨
+    document.body.style.background = `url('${bgUrl}') center/cover no-repeat, #f7f7f7`;
     document.body.style.backgroundAttachment = 'fixed';
 }
 
@@ -135,7 +140,6 @@ function pickSequentialItem(direction = 'next') {
         currentIndex = (currentIndex - 1 + list.length) % list.length;
     }
     
-    // 換景邏輯：每切換 7 次更換一次背景
     cardChangeCounter++;
     if (cardChangeCounter >= 7) {
         applyBackground(currentCategory);
@@ -152,7 +156,6 @@ function updateDisplay() {
     const item = list[currentIndex];
     if(!item) return;
 
-    // 擴充 Fallback 機制防止 Undefined
     const textToShow = item['name_' + currentLang] || item.name_zh || item.name || "";
     itemName.textContent = textToShow;
     
@@ -213,11 +216,9 @@ langBtns.forEach(btn => {
         langBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
-        // 刷新大廳與標題
         refreshLobbyText();
         updateCategoryTitle();
         
-        // 刷新 Welcome 畫面 (如果還看得到)
         const welcomeText = document.getElementById('welcome-text');
         if (welcomeText) {
             if (currentLang === 'en') welcomeText.textContent = "Welcome to Menglan's Colorful World";
@@ -231,7 +232,6 @@ langBtns.forEach(btn => {
             else startBtnElem.textContent = "開始玩囉！";
         }
 
-        // 如果在遊戲中，刷新內容並重唸
         if (!gameContainer.classList.contains('hidden')) {
             updateDisplay();
             const list = gameData[currentCategory];
